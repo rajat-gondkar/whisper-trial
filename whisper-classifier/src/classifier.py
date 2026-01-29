@@ -116,8 +116,20 @@ class CodingClassifier:
     
     def _build_patterns(self):
         """Build regex patterns for matching."""
-        # Pattern for coding verbs
-        verb_pattern = '|'.join(re.escape(v) for v in self.coding_verbs)
+        # Pattern for coding verbs (including -ing forms)
+        # Handle irregular gerunds by creating explicit list
+        verb_stems = []
+        for v in self.coding_verbs:
+            verb_stems.append(v)
+            # Add -ing form, handling common patterns:
+            # - e-dropping: make -> making, write -> writing
+            # - doubling: fix -> fixing (already correct)
+            if v.endswith('e') and len(v) > 2:
+                verb_stems.append(v[:-1] + 'ing')  # make -> making
+            else:
+                verb_stems.append(v + 'ing')  # fix -> fixing
+        
+        verb_pattern = '|'.join(re.escape(v) for v in verb_stems)
         self.coding_verb_pattern = re.compile(
             rf'\b({verb_pattern})\b',
             re.IGNORECASE
@@ -130,8 +142,15 @@ class CodingClassifier:
             re.IGNORECASE
         )
         
-        # Pattern for code structures
-        struct_pattern = '|'.join(re.escape(s) for s in self.code_structures)
+        # Pattern for code structures (handle plurals)
+        struct_stems = []
+        for s in self.code_structures:
+            struct_stems.append(s)
+            # Add plural form if it doesn't already end in 's'
+            if not s.endswith('s'):
+                struct_stems.append(s + 's')
+        
+        struct_pattern = '|'.join(re.escape(s) for s in struct_stems)
         self.structure_pattern = re.compile(
             rf'\b({struct_pattern})\b',
             re.IGNORECASE
@@ -197,6 +216,17 @@ class CodingClassifier:
         text_lower = text.lower().strip()
         matched_patterns = []
         
+        # Check for incomplete/meaningless requests (placeholders like "___", "a", etc.)
+        # Pattern: "give me a ___" or "show me ___" with no actual content
+        if re.search(r'\b(a|an|the)\s*[_\.]+\s*$', text_lower) or \
+           re.search(r'^(give|show|provide)\s+(me\s+)?(a|an|the)?\s*[_\.]*\s*$', text_lower):
+            return ClassificationResult(
+                classification="NON-CODING",
+                confidence=1.0,
+                reasoning="Incomplete/meaningless request",
+                matched_patterns=["incomplete_request"]
+            )
+        
         # Step 1: Check for strong NON-CODING indicators first
         non_coding_score, non_coding_matches = self._check_non_coding_indicators(text_lower)
         matched_patterns.extend(non_coding_matches)
@@ -234,7 +264,12 @@ class CodingClassifier:
                 "can you write", "can you code", "can you create", "can you implement",
                 "can you solve", "can you fix", "can you complete", "can you debug",
                 "can you help me solve", "can you help solve", "could you solve",
-                "are you able to solve", "are you able to find"
+                "are you able to solve", "are you able to find",
+                "can you optimize", "can you refactor", "can you replace", "can you modify",
+                "can you change", "can you update", "can you improve", "can you rewrite",
+                "can you convert", "can you transform", "can you add", "can you remove",
+                "can you delete", "can you make", "can you build", "can you give",
+                "can you show", "can you provide", "can you try"
             ]
             if not any(phrase in text for phrase in coding_action_phrases):
                 score += 0.2
@@ -350,10 +385,25 @@ class CodingClassifier:
             )
         
         # Rule 3: If strong NON-CODING indicators present → analyze further
-        if non_coding_score > 0.3:
+        if non_coding_score > 0:
+            # Check if text starts with a non-coding indicator
+            starts_with_non_coding = any(
+                text.startswith(indicator) 
+                for indicator in self.non_coding_indicators
+            )
+            
             # Explanatory questions about code concepts → NON-CODING
             # e.g., "Explain how recursion works", "What is a function"
             # These have non-coding verbs like "explain", "what is", "how does"
+            
+            # If starts with non-coding indicator and only has generic verbs, it's explanatory
+            if starts_with_non_coding and non_coding_score >= 0.3:
+                # "Explain merge sort" - explain is more dominant than merge/sort verbs
+                return (
+                    "NON-CODING",
+                    0.9,
+                    f"Explanatory question starting with '{text.split()[0].lower()}'"
+                )
             
             # If non-coding score is higher, it's likely explanatory
             if non_coding_score >= coding_score:
@@ -364,7 +414,7 @@ class CodingClassifier:
                 )
             
             # Mixed signals - be conservative, unless we have strong solve/DSA patterns
-            if not has_strong_phrase and not has_solve_pattern:
+            if not has_strong_phrase and not has_solve_pattern and non_coding_score >= 0.3:
                 return (
                     "NON-CODING",
                     0.7,
@@ -372,7 +422,7 @@ class CodingClassifier:
                 )
         
         # Rule 4: Strong coding pattern or solve pattern present → CODING
-        if has_strong_phrase or has_solve_pattern or (has_coding_verb and coding_score >= 0.5):
+        if has_strong_phrase or has_solve_pattern or (has_coding_verb and coding_score >= 0.4):
             confidence = min(coding_score + 0.2, 1.0)
             return (
                 "CODING",
