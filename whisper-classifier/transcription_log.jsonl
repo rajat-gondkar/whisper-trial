@@ -1,0 +1,35 @@
+{"transcription": "Hello", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1849.3584999996528, "timestamp": "2026-01-29T22:38:28.191489"}
+{"transcription": "That is very bad. I want to see how fast you can be doing this. It could be helpful if the thing is very quick.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1660.4667090014118, "timestamp": "2026-01-29T22:38:42.907880"}
+{"transcription": "Can you write this coding question about the data?", "classification": "CODING", "confidence": 0.8999999999999999, "latency_ms": 1060.4320829988865, "timestamp": "2026-01-29T22:38:49.515679"}
+{"transcription": "I would you to find the solution for this question.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1089.7162910005136, "timestamp": "2026-01-29T22:38:56.431531"}
+{"transcription": "Can you solve these coding questions about making a DSC question?", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1159.162332998676, "timestamp": "2026-01-29T22:39:04.602912"}
+{"transcription": "Is this about this, can you make this a coding question?", "classification": "NON-CODING", "confidence": 0.6, "latency_ms": 1216.5463339988491, "timestamp": "2026-01-29T22:39:12.559455"}
+{"transcription": "Can you show us all this coding question which is shown on the screen?", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1180.4809589993965, "timestamp": "2026-01-29T22:39:21.625054"}
+{"transcription": "Please solve this coding question on the screen.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1020.0804589985637, "timestamp": "2026-01-29T22:39:27.162175"}
+{"transcription": "Can you solve this question?", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1043.3372080005938, "timestamp": "2026-01-29T22:39:33.382999"}
+{"transcription": "Can you make this though?", "classification": "NON-CODING", "confidence": 0.6, "latency_ms": 1002.30995900165, "timestamp": "2026-01-29T22:39:39.041696"}
+{"transcription": "Are you able to find the solution for the reporting question given on the screen? It's about DSM.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1369.9646670011134, "timestamp": "2026-01-29T22:39:49.412748"}
+{"transcription": "It's a dex equation. Please solve it", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1049.4445000003907, "timestamp": "2026-01-29T22:39:56.188951"}
+{"transcription": "It's a real safe question, please follow it.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1110.2588749999995, "timestamp": "2026-01-29T22:40:01.851386"}
+{"transcription": "It's a DSA question, please call it, I told you.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1355.0108750005165, "timestamp": "2026-01-29T22:40:08.694682"}
+{"transcription": "Can you please follow the discussion on the screen?", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1189.3536670013418, "timestamp": "2026-01-29T22:46:01.433296"}
+{"transcription": "Can you please stop the discussion on the screen?", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1137.2737499987124, "timestamp": "2026-01-29T22:46:08.182216"}
+{"transcription": "Yes sir, I will solve the question with this one here.", "classification": "CODING", "confidence": 0.8999999999999999, "latency_ms": 1135.7752909989358, "timestamp": "2026-01-29T22:46:13.980852"}
+{"transcription": "So you want me to find the DSA coding question.", "classification": "CODING", "confidence": 1.0, "latency_ms": 1173.6695830004464, "timestamp": "2026-01-29T22:46:22.418791"}
+{"transcription": "You want me to say hello at the end.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1041.853540999, "timestamp": "2026-01-29T22:46:28.486924"}
+{"transcription": "If you want me to type hello at the end a print hello world", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 1267.075042000215, "timestamp": "2026-01-29T22:46:37.314415"}
+{"transcription": "Hello.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 2733.376666999902, "timestamp": "2026-01-29T22:55:40.288261"}
+{"transcription": "Can we just solve this question on the screen please?", "classification": "CODING", "confidence": 1.0, "latency_ms": 3135.0486669998645, "timestamp": "2026-01-29T22:55:49.094860"}
+{"transcription": "This is pretty good on this one, but I don't think this is a good model to run at the end.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 3985.849958000472, "timestamp": "2026-01-29T22:56:06.045153"}
+{"transcription": "Let me just fix this issue.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 2821.5992499990534, "timestamp": "2026-01-29T22:56:19.679213"}
+{"transcription": "Can you just take this issue off?", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 2853.5549160005758, "timestamp": "2026-01-29T22:56:26.707206"}
+{"transcription": "Can you fix this issue, please?", "classification": "CODING", "confidence": 0.5, "latency_ms": 2925.22983300114, "timestamp": "2026-01-29T22:56:35.578590"}
+{"transcription": "Let me just work on it and get you the final answer.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 3159.564790999866, "timestamp": "2026-01-29T22:56:45.715950"}
+{"transcription": "Thank you.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 2965.783999999985, "timestamp": "2026-01-29T22:56:51.817467"}
+{"transcription": "Can you fix this issue, please?", "classification": "CODING", "confidence": 0.5, "latency_ms": 2877.911209001468, "timestamp": "2026-01-29T22:56:55.932870"}
+{"transcription": "Can you finish this code?", "classification": "CODING", "confidence": 1.0, "latency_ms": 2756.370541999786, "timestamp": "2026-01-29T22:57:09.709123"}
+{"transcription": "Yes sir, let me just do this.", "classification": "CODING", "confidence": 0.6000000000000001, "latency_ms": 2976.9686660001753, "timestamp": "2026-01-29T22:57:18.529362"}
+{"transcription": "OK, so let me just solve this question on the screen.", "classification": "CODING", "confidence": 1.0, "latency_ms": 3139.7920839990547, "timestamp": "2026-01-29T22:57:31.092667"}
+{"transcription": "Fine, let's see what's happening.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 3422.147458000836, "timestamp": "2026-01-29T22:57:40.975159"}
+{"transcription": "All right.", "classification": "NON-CODING", "confidence": 0.95, "latency_ms": 2593.843124999694, "timestamp": "2026-01-29T22:57:50.744193"}
+{"transcription": "Complete this code.", "classification": "CODING", "confidence": 1.0, "latency_ms": 2596.4143330002116, "timestamp": "2026-01-29T22:57:56.346454"}

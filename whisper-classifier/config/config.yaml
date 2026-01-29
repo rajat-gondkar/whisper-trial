@@ -1,0 +1,198 @@
+# Real-Time Voice Transcription & Classifier Configuration
+
+# Audio Capture Settings
+audio:
+  sample_rate: 16000          # 16kHz for Whisper compatibility
+  channels: 1                  # Mono audio
+  chunk_duration: 1.5          # Seconds per audio chunk
+  buffer_duration: 30          # Maximum buffer duration in seconds
+  device: null                 # null = default microphone, or specify device index
+  vad_aggressiveness: 2        # Voice Activity Detection: 0-3 (higher = more aggressive)
+  silence_threshold: 0.5       # Seconds of silence before considering utterance complete
+  min_speech_duration: 0.3     # Minimum speech duration to process (seconds)
+
+# Whisper Transcription Settings
+transcription:
+  model_size: "medium"         # Options: tiny, base, small, medium, large-v2, large-v3
+                               # medium = better accuracy, ~2GB RAM, ~200-400ms latency
+  device: "auto"               # Options: auto, cpu, cuda
+  compute_type: "int8"         # Options: int8, float16, float32 (int8 for speed)
+  language: "en"               # Language code or null for auto-detect
+  beam_size: 5                 # Beam search size (5 = good balance of speed/accuracy)
+  best_of: 5                   # Number of candidates (5 = better accuracy)
+  temperature: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]  # Multiple temperatures for fallback
+  vad_filter: true             # Use Whisper's built-in VAD filter
+  word_timestamps: false       # Disable for lower latency
+  condition_on_previous_text: true  # Use context from previous utterances
+  compression_ratio_threshold: 2.4  # Detect and skip low-quality audio
+  log_prob_threshold: -1.0     # Skip segments with low confidence
+  no_speech_threshold: 0.6     # Skip if likely no speech
+
+# Text Cleanup Settings
+text_cleanup:
+  remove_filler_words: true
+  filler_words:
+    - "um"
+    - "umm"
+    - "uh"
+    - "uhh"
+    - "ah"
+    - "ahh"
+    - "er"
+    - "err"
+    - "like"
+    - "you know"
+    - "i mean"
+    - "sort of"
+    - "kind of"
+    - "basically"
+  normalize_case: true         # Convert to lowercase for classification
+  strip_punctuation: false     # Keep punctuation for context
+
+# Classification Settings
+classification:
+  default_class: "NON-CODING"  # Default when ambiguous
+  confidence_threshold: 0.7    # Minimum confidence for CODING classification
+  
+  # Coding intent verbs (must be present for CODING classification)
+  coding_verbs:
+    - "write"
+    - "implement"
+    - "create"
+    - "build"
+    - "generate"
+    - "code"
+    - "program"
+    - "develop"
+    - "make"
+    - "design"
+  
+  # Coding intent phrases (strong indicators)
+  coding_phrases:
+    - "write code"
+    - "write a function"
+    - "write a program"
+    - "write a script"
+    - "implement a"
+    - "create a function"
+    - "create a class"
+    - "create an api"
+    - "build a"
+    - "generate code"
+    - "code for"
+    - "code to"
+    - "program to"
+    - "program for"
+    - "give me code"
+    - "show me code"
+    - "write me"
+    - "can you code"
+    - "can you write"
+  
+  # Programming languages (context indicators)
+  programming_languages:
+    - "python"
+    - "java"
+    - "javascript"
+    - "typescript"
+    - "c++"
+    - "cpp"
+    - "c#"
+    - "csharp"
+    - "ruby"
+    - "go"
+    - "golang"
+    - "rust"
+    - "swift"
+    - "kotlin"
+    - "scala"
+    - "php"
+    - "perl"
+    - "r"
+    - "matlab"
+    - "sql"
+    - "html"
+    - "css"
+    - "bash"
+    - "shell"
+    - "powershell"
+  
+  # Code structure terms (context indicators)
+  code_structures:
+    - "function"
+    - "method"
+    - "class"
+    - "api"
+    - "endpoint"
+    - "component"
+    - "module"
+    - "script"
+    - "algorithm"
+    - "data structure"
+    - "loop"
+    - "array"
+    - "list"
+    - "dictionary"
+    - "hashmap"
+    - "tree"
+    - "graph"
+    - "linked list"
+    - "stack"
+    - "queue"
+    - "database"
+    - "query"
+    - "server"
+    - "client"
+    - "rest"
+    - "graphql"
+  
+  # NON-CODING indicators (questions that don't require code)
+  non_coding_indicators:
+    - "what is"
+    - "what are"
+    - "explain"
+    - "describe"
+    - "tell me about"
+    - "how does"
+    - "how do"
+    - "why is"
+    - "why does"
+    - "when should"
+    - "difference between"
+    - "compare"
+    - "versus"
+    - "vs"
+    - "define"
+    - "definition"
+    - "meaning of"
+    - "concept of"
+    - "theory"
+    - "principle"
+    - "best practice"
+    - "advantage"
+    - "disadvantage"
+    - "pros and cons"
+    - "is it better"
+    - "should i use"
+    - "which is better"
+
+# Pipeline Settings
+pipeline:
+  max_queue_size: 10           # Maximum pending audio chunks
+  processing_timeout: 5.0      # Timeout for processing single chunk
+  enable_logging: true         # Log all transcriptions and classifications
+  log_file: "transcription_log.jsonl"
+
+# Performance Targets (for monitoring)
+performance:
+  target_latency_ms: 500       # Target end-to-end latency
+  max_latency_ms: 700          # Maximum acceptable latency
+  target_accuracy: 0.98        # Target classification accuracy
+  max_false_positive_rate: 0.01
+
+# Output Settings
+output:
+  show_confidence: true        # Show confidence score
+  show_latency: true           # Show processing latency
+  colorize: true               # Use colored terminal output
+  json_output: false           # Output as JSON instead of formatted text

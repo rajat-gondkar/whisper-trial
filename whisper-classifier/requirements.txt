@@ -1,0 +1,16 @@
+# Core Dependencies
+faster-whisper>=1.0.0
+sounddevice>=0.4.6
+numpy>=1.24.0
+
+# Audio Processing
+scipy>=1.11.0
+webrtcvad>=2.0.10
+
+# Utilities
+PyYAML>=6.0
+rich>=13.0.0
+
+# Optional: GPU acceleration (uncomment if using CUDA)
+# torch>=2.0.0
+# nvidia-cudnn-cu11>=8.6.0
