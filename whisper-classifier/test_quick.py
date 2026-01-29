@@ -41,6 +41,20 @@ TEST_CASES = [
     ("Fix this bug in my code", "CODING"),
     ("Debug this function please", "CODING"),
     
+    # NEW: User's specific examples - traversal and algorithm requests
+    ("Give me pre-ordered traversal of a binary tree.", "CODING"),
+    ("Give me post-order traversal of a binary tree.", "CODING"),
+    ("Give me BFS approach of graph traversal.", "CODING"),
+    ("Give me DFS approach of graph traversal.", "CODING"),
+    ("Show me the inorder traversal", "CODING"),
+    ("Show me level order traversal code", "CODING"),
+    ("Provide the dijkstra algorithm", "CODING"),
+    ("Give me merge sort implementation", "CODING"),
+    ("Show me quick sort code", "CODING"),
+    ("Give me binary search", "CODING"),
+    ("Show me the two pointer approach", "CODING"),
+    ("Give me sliding window solution", "CODING"),
+    
     # NON-CODING cases
     ("What is machine learning?", "NON-CODING"),
     ("Explain how blockchain works", "NON-CODING"),

@@ -353,11 +353,14 @@ class CodingClassifier:
         if non_coding_score > 0.3:
             # Explanatory questions about code concepts → NON-CODING
             # e.g., "Explain how recursion works", "What is a function"
-            if non_coding_score > coding_score:
+            # These have non-coding verbs like "explain", "what is", "how does"
+            
+            # If non-coding score is higher, it's likely explanatory
+            if non_coding_score >= coding_score:
                 return (
                     "NON-CODING",
-                    non_coding_score,
-                    f"Non-coding indicators ({non_coding_score:.2f}) outweigh coding ({coding_score:.2f})"
+                    0.9,
+                    f"Explanatory/conceptual question (non-coding: {non_coding_score:.2f}, coding: {coding_score:.2f})"
                 )
             
             # Mixed signals - be conservative, unless we have strong solve/DSA patterns
